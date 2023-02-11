@@ -14,37 +14,19 @@ import java.util.Arrays;
  * @rank   4 kyu
  */
 public class Snail {
-  public static final int WALL = -1;
 
-  public static void main(String[] args) {
-    // {1,2,3,6,9,8,7,4,5}
-    System.out.println(Arrays.toString(snail(new int[][]{{1,2,3},{4,5,6},{7,8,9}})));
-  }
-
-  public static int[] snail(int[][] array) {
-    if(array[0].length <= 0) { return new int[0]; }
-
-    int n = array.length;
-    int[] result = new int[n * n];
-    int x = 0,y = 0;
-    int xStep = 1,yStep = 0;
-
-    for(int i = 0; i < result.length; ++i) {
-      result[i] = array[y][x];
-      array[y][x] = WALL;
-
-      x += xStep; y += yStep;
-
-      if(xStep != 0 && (x < 0 || x >= n || array[y][x] == WALL)) {
-        x += -xStep; y += xStep;
-        yStep = xStep; xStep = 0;
+    public static int[] snail(int[][] array) {
+      if (array[0].length == 0) return new int[0];
+      int n = array.length;
+      int[] answer = new int[n*n];
+      int index=0;
+      for (int i = 0; i<n/2; i++){
+        for (int j = i; j < n-i; j++) answer[index++] = array[i][j];
+        for (int j = i+1; j < n-i; j++) answer[index++] = array[j][n-i-1];
+        for (int j = i+1; j < n-i; j++) answer[index++] = array[n-i-1][n-j-1];
+        for (int j = i+1; j < n-i-1; j++) answer[index++] = array[n-j-1][i];
       }
-      else if(yStep != 0 && (y < 0 || y >= n || array[y][x] == WALL)) {
-        x += -yStep; y += -yStep;
-        xStep = -yStep; yStep = 0;
-      }
-    }
-
-    return result;
-  }
+      if (n%2 != 0) answer[index++] = array[n/2][n/2];
+      return answer;
+    } 
 }
