@@ -1,17 +1,6 @@
 import java.util.Arrays;
-
 import java.util.stream.Collectors;
 
-/**
- * <pre>
- * This was good practice for using Java 8 stuff, but then I saw a solution
- *   which used one regex, dumb.
- * </pre>
- *
- * @author Jonathan Bradley Whited
- * @see    https://www.codewars.com/kata/simple-pig-latin/java
- * @rank   5 kyu
- */
 public class SimplePigLatin {
   public static void main(String[] args) {
     System.out.println(pigIt("Pig latin is cool")); // "igPay atinlay siay oolcay"
